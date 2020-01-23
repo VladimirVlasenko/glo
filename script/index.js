@@ -5,6 +5,6 @@ let deposit;
 let mission;
 let period;
 
-alert('Во славу сатане!');
+alert('Закрыть вопрос по закапыванию юзера?');
 
 console.log('Мать земля, помоги мне!');
