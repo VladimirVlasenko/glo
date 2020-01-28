@@ -16,38 +16,60 @@ document.addEventListener('DOMContentLoaded', () => {
     //     return sum;
     //     }
 
+   
+
     let deposit = confirm('Есть ли у вас депоозит в банке?');
-    let mission = 100000;
+    let mission = +100000;
     let period = 6;
-    let budgetMonth = money + income - expenses1 - expenses2;
-    let budgetDay = budgetMonth / 30;
-    console.log(budgetMonth);
-    console.log(budgetDay);
-    let numMonth = Math.ceil(100000 / budgetMonth);
-    console.log(numMonth);
 
 
-    console.log(typeof money);
-    console.log(typeof income);
-    console.log(typeof deposit);
+
+    let showTypeOf = function(data) {
+        console.log(data, typeof(data));
+    }
+    showTypeOf(money);
+    showTypeOf(income);
+    showTypeOf(deposit);
+
+    let getExpensesMonth = function() {
+        return expenses1 + expenses2;
+    }
+    console.log(getExpensesMonth() + ' - сумма всех обязательных расходов за месяц');
+
+    let getAccumulatedMonth = function() {
+        return money + income - expenses1 - expenses2;
+    }
+
+    let accumulatedMonth = getAccumulatedMonth();
+    console.log(accumulatedMonth + ' - накопления за месяц');
+
+    let budgetDay = accumulatedMonth / 30;
+
+    let getTargetMonth = function() {
+        return Math.ceil(mission / accumulatedMonth);
+    }
+
 
 
     console.log('Период равен ' + period + ' месяцев');
     console.log('Цель заработать ' + mission + ' рублей');
-    console.log('Цель будет достигнута за ' + numMonth + ' месяцев');
+    console.log('Цель будет достигнута за ' + getTargetMonth() + ' месяцев');
     console.log('Бюджет на день составит ' + budgetDay + ' рублей');
 
+    let getStatusIncome = function() {
+        if(budgetDay >= 1200) {
+            return ('У вас высокий уровень дохода');
+        } else if (budgetDay < 1200 && budgetDay >= 600) {
+            return ('У вас средний уровень дохода');
+        } else if (budgetDay < 600) {
+            return ('Ваш уровень дохода ниже среднего');
+        } else if (budgetDay <= 0) {
+            return ('Что-то пошло не так');
+        }
+    };
 
-    if(budgetDay >= 1200) {
-        console.log('У вас высокий уровень дохода');
-    } else if (budgetDay < 1200 && budgetDay >= 600) {
-        console.log('У вас средний уровень дохода');
-    } else if (budgetDay < 600) {
-        console.log('Ваш уровень дохода ниже среднего');
-    } else if (budgetDay <= 0) {
-        console.log('Что-то пошло не так');
-    }
+    console.log(getStatusIncome());
 
-    console.log(addExpenses.toLowerCase().split(','))
+    console.log(addExpenses.toLowerCase().split(','));
 
 });
