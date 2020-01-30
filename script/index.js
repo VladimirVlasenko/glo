@@ -5,13 +5,7 @@
      
      let money;
 
-    //  let start = function() {
-    //     money = prompt('Ваш месячный доход?', 50000);
-    //     while (!isNumber(money)) {
-    //         money = prompt('Ваш месячный доход?', 50000);
-    //     }
-    //     return +money;
-    // }
+
     let start = function() {
         do {money = prompt('Ваш месячный доход?', 50000)}
         while(!isNumber(money));
@@ -21,19 +15,8 @@
     start();
 
     let income = +10000;
-    // let expensesName1 = prompt('Введите название обязатальной статьи расходов в этом месяце', 'Адвокааааат!');
-    // let expenses1 = +prompt('Введите расходуемую на ' + expensesName1 + ' сумму', 4555);
-    // let expensesName2 = prompt('Введите название обязатальной статьи расходов в этом месяце', 'Шиномонтаж');
-    // let expenses2 = +prompt('Введите расходуемую на ' + expensesName2 + ' сумму', 2333);
     let addExpenses = prompt('Перечислите через запятую названия дополнительных статей расходов в этом месяце', 'вода, газ, свет, инет, телефон');
-    // function arraySum(addExpenses) {
-    //     addExpenses = prompt('Перечислите через запятую ваши возможные расходы за рассчитываемый период').split(',');
-    //     var sum = 0;
-    //     for(let i = 0; i < addExpenses.length; i++){
-    //         sum += addExpenses[i]*1;
-    //         }
-    //     return sum;
-    //     }
+
 
    
 
@@ -69,7 +52,6 @@
 
             do {
                 sum = prompt('Во сколько это обойдется?', 3000);
-                console.log(typeof(sum));
             }
             while (!isNumber(sum));
             sum1 += +sum;
