@@ -1,12 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
 
-    let money = +prompt('Ваш месячный доход?');
+    let isNumber = function(n){
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+     
+     let money;
+
+    //  let start = function() {
+    //     money = prompt('Ваш месячный доход?', 50000);
+    //     while (!isNumber(money)) {
+    //         money = prompt('Ваш месячный доход?', 50000);
+    //     }
+    //     return +money;
+    // }
+    let start = function() {
+        do {money = prompt('Ваш месячный доход?', 50000)}
+        while(!isNumber(money));
+        return +money;
+    };
+
+    start();
+
     let income = +10000;
-    let expensesName1 = prompt('Введите название обязатальной статьи расходов в этом месяце');
-    let expenses1 = +prompt('Введите расходуемую на ' + expensesName1 + ' сумму');
-    let expensesName2 = prompt('Введите название обязатальной статьи расходов в этом месяце');
-    let expenses2 = +prompt('Введите расходуемую на ' + expensesName2 + ' сумму');
-    let addExpenses = prompt('Перечислите через запятую названия дополнительных статей расходов в этом месяце');
+    // let expensesName1 = prompt('Введите название обязатальной статьи расходов в этом месяце', 'Адвокааааат!');
+    // let expenses1 = +prompt('Введите расходуемую на ' + expensesName1 + ' сумму', 4555);
+    // let expensesName2 = prompt('Введите название обязатальной статьи расходов в этом месяце', 'Шиномонтаж');
+    // let expenses2 = +prompt('Введите расходуемую на ' + expensesName2 + ' сумму', 2333);
+    let addExpenses = prompt('Перечислите через запятую названия дополнительных статей расходов в этом месяце', 'вода, газ, свет, инет, телефон');
     // function arraySum(addExpenses) {
     //     addExpenses = prompt('Перечислите через запятую ваши возможные расходы за рассчитываемый период').split(',');
     //     var sum = 0;
@@ -18,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
    
 
-    let deposit = confirm('Есть ли у вас депоозит в банке?');
+    let deposit = confirm('Есть ли у вас депозит в банке?');
     let mission = +100000;
     let period = 6;
 
-
+   
 
     let showTypeOf = function(data) {
         console.log(data, typeof(data));
@@ -31,13 +50,39 @@ document.addEventListener('DOMContentLoaded', () => {
     showTypeOf(income);
     showTypeOf(deposit);
 
+    let expenses1,
+        expenses2;
+
+
+    
     let getExpensesMonth = function() {
-        return expenses1 + expenses2;
+        
+        let sum;
+        let sum1 = 0;
+        for (let i = 0; i < 2; i++) {
+
+            if (i === 0) {
+                expenses1 = prompt('Введите название обязатальной статьи расходов в этом месяце', 'Адвокааааат!');
+            } else if(i === 1) {
+                expenses2 = prompt('Введите название обязатальной статьи расходов в этом месяце', 'Шиномонтаж!');
+            }
+
+            do {
+                sum = prompt('Во сколько это обойдется?', 3000);
+                console.log(typeof(sum));
+            }
+            while (!isNumber(sum));
+            sum1 += +sum;
+        }
+        return sum1;
     }
-    console.log(getExpensesMonth() + ' - сумма всех обязательных расходов за месяц');
+
+    let expensesMonth = getExpensesMonth();
+
+    console.log(expensesMonth + ' - сумма всех обязательных расходов за месяц');
 
     let getAccumulatedMonth = function() {
-        return money + income - expenses1 - expenses2;
+        return +money + income - +expensesMonth;
     }
 
     let accumulatedMonth = getAccumulatedMonth();
@@ -53,7 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Период равен ' + period + ' месяцев');
     console.log('Цель заработать ' + mission + ' рублей');
-    console.log('Цель будет достигнута за ' + getTargetMonth() + ' месяцев');
+
+    if (getTargetMonth() < 0) {
+        console.log('Цель не будет достигнута')
+    } else {
+        console.log('Цель будет достигнута за ' + getTargetMonth() + ' месяцев');
+    }
+
     console.log('Бюджет на день составит ' + budgetDay + ' рублей');
 
     let getStatusIncome = function() {
@@ -71,5 +122,3 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(getStatusIncome());
 
     console.log(addExpenses.toLowerCase().split(','));
-
-});
