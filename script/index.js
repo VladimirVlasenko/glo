@@ -208,6 +208,7 @@ class AppData {
     }
 
     reset() {
+        const _this =this;
         buttonCount.style.display = 'block';
         buttonCancel.style.display = 'none';
         inputRangePeriodSelect.value = 1;
@@ -223,11 +224,22 @@ class AppData {
         }
         expensesItems = document.querySelectorAll('.expenses-items');
 
-        allInputs.forEach(function(item, i, allInputs) {
-            allInputs = document.querySelectorAll('input');
-            item.value = '';
-            item.disabled = false;
-        });
+        for (let i = 0; i < allInputs.length; i++) {
+            allInputs[i].value = '';
+        }
+
+        _this.budget = 0;
+        _this.income = {};
+        _this.incomeMonth = 0;
+        _this.addIncome = [];
+        _this.expenses = {};
+        _this.addExpenses = [];
+        _this.deposit = true;
+        _this.percentDeposit = 0;
+        _this.moneyDeposit = 0;
+        _this.budgetDay = 0;
+        _this.budgetMonth = 0;
+        _this.expensesMonth = 0;
 
         if (buttonPlusIncomeAdd.style.display === 'none') {
             buttonPlusIncomeAdd.style.display = 'block';
