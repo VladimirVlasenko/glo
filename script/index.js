@@ -4,30 +4,32 @@
 let isNumber = function(n){
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
-let inputSalaryAmount = document.querySelector('.salary-amount');
-let incomeItems = document.querySelectorAll('.income-items');
-let inputIncomeTitle = document.querySelectorAll('.income-title');
-let inputIncomeAmount = document.querySelectorAll('.income-amount');
-let buttonPlusIncomeAdd = document.querySelector('.income_add');
-let inputAdditionalIncome = document.querySelectorAll('.additional_income-item');
-let expensesItems = document.querySelectorAll('.expenses-items');
+
+const inputSalaryAmount = document.querySelector('.salary-amount');
+const buttonPlusIncomeAdd = document.querySelector('.income_add');
+const inputAdditionalIncome = document.querySelectorAll('.additional_income-item');
+const buttonPlusExpensesAdd = document.querySelector('.expenses_add');
+const periodAmount = document.querySelector('.period-amount');
+const budgetMonthValue = document.querySelector('.budget_month-value');
+const budgetDayValue = document.querySelector('.budget_day-value');
+const expensesMonthValue = document.querySelector('.expenses_month-value');
+const additionalIncomeValue = document.querySelector('.additional_income-value');
+const additionalExpensesValue = document.querySelector('.additional_expenses-value');
+const incomePeriodValue = document.querySelector('.income_period-value');
+const targetMonthValue = document.querySelector('.target_month-value');
+const buttonCount = document.querySelector('#start');
+const additionalExpensesItem = document.querySelector('.additional_expenses-item');
+const buttonCancel = document.querySelector('#cancel');
+
 let inputExpensesTitle = document.querySelector('.expenses-title');
 let inputExpensesAmount = document.querySelector('.expenses-amount');
-let buttonPlusExpensesAdd = document.querySelector('.expenses_add');
+let inputIncomeTitle = document.querySelectorAll('.income-title');
+let inputIncomeAmount = document.querySelectorAll('.income-amount');
 let depositCheckBox = document.querySelector('#deposit-check');
 let inputTargetAmount = document.querySelector('.target-amount');
 let inputRangePeriodSelect = document.querySelector('.period-select');
-let periodAmount = document.querySelector('.period-amount');
-let budgetMonthValue = document.querySelector('.budget_month-value');
-let budgetDayValue = document.querySelector('.budget_day-value');
-let expensesMonthValue = document.querySelector('.expenses_month-value');
-let additionalIncomeValue = document.querySelector('.additional_income-value');
-let additionalExpensesValue = document.querySelector('.additional_expenses-value');
-let incomePeriodValue = document.querySelector('.income_period-value');
-let targetMonthValue = document.querySelector('.target_month-value');
-let buttonCount = document.querySelector('#start');
-let additionalExpensesItem = document.querySelector('.additional_expenses-item');
-let buttonCancel = document.querySelector('#cancel');
+let expensesItems = document.querySelectorAll('.expenses-items');
+let incomeItems = document.querySelectorAll('.income-items');
 let allInputs = document.querySelectorAll('input');
 
 
@@ -104,15 +106,12 @@ AppData.prototype.addExpensesBlock = function() {
 };
 AppData.prototype.getExpenses = function() {
     expensesItems.forEach(function(item) {
-        console.log(this);
         let itemExpenses = item.querySelector('.expenses-title').value;
         let cashExpenses = item.querySelector('.expenses-amount').value;
         if(itemExpenses !== '' && cashExpenses !== '') {
-            console.log(this);
             this.expenses[itemExpenses] = cashExpenses;
         }   
         if(itemExpenses !== '' && cashExpenses !== '') {
-            console.log(this);
             this.expensesMonth += +this.expenses[itemExpenses];
         } 
         
@@ -164,7 +163,7 @@ AppData.prototype.changePeriod = function() {
     incomePeriodValue.innerHTML = inputRangePeriodSelect.value * _this.budgetMonth;
 };
 AppData.prototype.getBudget = function() {
-    this.budgetMonth = +inputSalaryAmount.value + +this.incomeMonth - +this.expensesMonth;
+    this.budgetMonth = +inputSalaryAmount.value + this.incomeMonth - +this.expensesMonth;
     this.budgetDay = Math.round(this.budgetMonth / 30 , 0);
 };
 AppData.prototype.getTargetMonth = function() {
@@ -230,14 +229,8 @@ AppData.prototype.reset = function() {
       }
 };
 
-
-
-
-
-
-
 AppData.prototype.eventListeners = function() {
-    buttonCount.addEventListener('click', this.start);
+    buttonCount.addEventListener('click', this.start.bind(this));
     buttonPlusExpensesAdd.addEventListener('click', this.addExpensesBlock); 
     buttonPlusIncomeAdd.addEventListener('click', this.addIncomeBlock);
     inputRangePeriodSelect.addEventListener('input', this.changePeriod);
