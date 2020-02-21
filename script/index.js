@@ -66,6 +66,7 @@ class AppData {
             allInputs.forEach(function(item, i, allInputs) {
                 item.disabled = true;
             });
+            inputRangePeriodSelect.disabled = false;
             for (let i = 1; i < incomeItems.length; i++) {
                 incomeItems[i].disabled = true;
             }
