@@ -34,6 +34,7 @@ let inputRangePeriodSelect = document.querySelector('.period-select');
 let expensesItems = document.querySelectorAll('.expenses-items');
 let incomeItems = document.querySelectorAll('.income-items');
 let allInputs = document.querySelectorAll('input');
+let body = document.querySelector('body');
 
 
 class AppData {
@@ -99,9 +100,12 @@ class AppData {
 
     addExpensesBlock() {
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
-    
+        cloneExpensesItem.children[0].value = '';
+        cloneExpensesItem.children[1].value = '';
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, buttonPlusExpensesAdd);
         expensesItems = document.querySelectorAll('.expenses-items');
+        
+        
 
         if (expensesItems.length === 3) {
             buttonPlusExpensesAdd.style.display = 'none';
@@ -124,6 +128,8 @@ class AppData {
 
     addIncomeBlock() {
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        cloneIncomeItem.children[0].value = '';
+        cloneIncomeItem.children[1].value = '';
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, buttonPlusIncomeAdd);
         incomeItems = document.querySelectorAll('.income-items');
         if (incomeItems.length === 3) {
@@ -294,6 +300,19 @@ class AppData {
 
         buttonCancel.addEventListener('click', this.reset);
         depositCheckBox.addEventListener('change', this.depositHandler.bind(this));
+
+        body.addEventListener('input', (event) => {
+            let target = event.target;
+            if (target.matches('input[placeholder="Наименование"]')) {
+                target.value = target.value.replace(/[^а-яА-Я,. ]/, '');
+            }
+        });
+        body.addEventListener('input', (event) => {
+            let target = event.target;
+            if (target.matches('input[placeholder="Сумма"]')) {
+                target.value = target.value.replace(/[^0-9]/, '');
+            }
+        });
     }
 }
 
